@@ -1,14 +1,12 @@
 package com.example.member.global.init;
 
-import com.example.member.book.entity.Author;
-import com.example.member.book.entity.Genre;
-import com.example.member.book.repository.AuthorRepository;
-import com.example.member.book.repository.GenreRepository;
+import com.example.member.domain.author.entity.Author;
+import com.example.member.domain.genre.entity.Genre;
+import com.example.member.domain.author.repository.AuthorRepository;
+import com.example.member.domain.genre.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
