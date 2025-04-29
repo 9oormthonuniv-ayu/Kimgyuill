@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+<h1>메인 페이지</h1>
+
+<p>Session 값 확인: <span th:text="${session.loginEmail}"></span></p>
+
+<div>
+    <a href="/member/update">내 정보 수정하기</a> |
+    <a href="/member/logout">로그아웃</a>
+</div>
+
+<hr>
+
+<div>
+    <h2>도서 관리</h2>
+    <a href="/books">도서 목록 보기</a><br>
+    <a href="/books/form">도서 등록하기</a>
+</div>
+
+<hr>
+
+<div>
+    <h2>대여 관리</h2>
+    <a href="/rental/form">도서 대여하기</a><br>
+    <a th:href="@{/rental/user/{userId}(userId=${session.loginId})}">내 대여 목록 보기</a>
+</div>
+
+</body>
+</html>
