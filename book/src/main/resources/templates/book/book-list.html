@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>도서 목록</title>
+</head>
+<body>
+<h1>등록된 도서 목록</h1>
+
+<a href="/main">메인 페이지로 돌아가기</a><br>
+<a href="/books/form">도서 등록</a>
+<br><br>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>제목</th>
+    <th>작가</th>
+    <th>장르</th>
+    <th>재고</th>
+    <th>대여</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td th:text="${book.bookId}"></td>
+    <td th:text="${book.title}"></td>
+    <td th:text="${book.authorName}"></td>
+    <td th:text="${#strings.arrayJoin(book.genres, ', ')}"></td>
+    <td th:text="${book.stock}"></td>
+    <td>
+      <form th:action="@{/rental/save-from-list}" method="post" th:if="${book.stock > 0}">
+        <input type="hidden" name="bookId" th:value="${book.bookId}">
+        <button type="submit">대여하기</button>
+      </form>
+      <span th:if="${book.stock == 0}">대여 불가</span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

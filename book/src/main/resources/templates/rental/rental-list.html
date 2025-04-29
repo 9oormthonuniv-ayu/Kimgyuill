@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>대여 기록 조회</title>
+</head>
+<body>
+<h1>대여 목록</h1>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>Rental ID</th>
+    <th>Book Title</th>
+    <th>대여일</th>
+    <th>반납 예정일</th>
+    <th>반납일</th>
+    <th>상태</th>
+    <th>반납</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="rental : ${rentals}">
+    <td th:text="${rental.rentalId}"></td>
+    <td th:text="${rental.bookTitle}"></td>
+    <td th:text="${rental.rentalDate}"></td>
+    <td th:text="${rental.dueDate}"></td>
+    <td th:text="${rental.returnDate}"></td>
+    <td th:text="${rental.status}"></td>
+    <td>
+      <form th:action="@{/rental/{rentalId}/return(rentalId=${rental.rentalId})}" method="post">
+        <input type="hidden" name="userId" th:value="${rental.userId}">
+        <button type="submit" th:if="${rental.status.name() == 'RENTED'}">반납</button>
+        <span th:if="${rental.status.name() == 'RETURNED'}">반납 완료</span>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
